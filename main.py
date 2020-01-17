@@ -1,4 +1,4 @@
-from tools.file_loader import loader
+from tools.get_shop_list_by_dishes import get_shop_list_by_dishes
+import pprint
 
-
-print(loader('recipes.txt'))
+pprint.pprint(get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2))
