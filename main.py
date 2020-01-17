@@ -1,4 +1,7 @@
 from tools.get_shop_list_by_dishes import get_shop_list_by_dishes
-import pprint
+from pprint import pprint
 
-pprint.pprint(get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2))
+try:
+   result = get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2)
+except Exception as e:
+    print(f'Ошибка: {e}')
