@@ -1,30 +1,12 @@
-def parser(data):
+def parser(file_data):
+    data = file_data.read().split('\n')
     result = {}
-    key_counter = 0
-    ingredient_counter = None
-    key = None
-    while True:
-        line = data.readline()
-        if not line:
-            break
-        elif key_counter == 1 and line == '\n':
-            key_counter = 0
-            ingredient_counter = None
-            key = None
-            continue
-        elif key_counter == 0:
-            result.setdefault(line.strip(), [])
-            key = line.strip()
-            key_counter += 1
-            continue
-        elif key_counter == 1 and not ingredient_counter:
-            ingredient_counter = int(line)
-            continue
-        elif key_counter == 1 and ingredient_counter:
-            keys = ['ingredient_name', 'quantity', 'measure']
-            values = line.strip().split('|')
-            ingredient = {a: b for a, b in zip(keys, values)}
-            result.get(key, []).append(ingredient)
-            ingredient_counter -= 1
-
+    while data:
+        next_recipe = int(data[1]) + 2
+        recipe = data[:next_recipe:1]
+        keys = ['ingredient_name', 'quantity', 'measure']
+        result[recipe[0]] = list(
+            map(lambda elem: {key: value for key, value in zip(keys, elem.split('|'))}, recipe[2:])
+        )
+        data = data[next_recipe + 1::1]
     return result
